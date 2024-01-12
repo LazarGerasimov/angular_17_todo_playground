@@ -1,12 +1,21 @@
 <div class="flex flex-col gap-2 p-6 bg-white rounded-lg shadow">
-    <h5 class="text-xl mb-2 font-bold text-gray-900">Login</h5>
-    <form action="" class="flex flex-col gap-1">
-        <input type="text" placeholder="Email"
-            class="w-full py-2 px-3 outline-none border-2 border-gray-200 focus:border-blue-600 rounded-lg">
-        <span class="text-red-600 text-sm font-medium">Email required.</span>
-        <input type="text" placeholder="Password"
-            class="w-full py-2 px-3 outline-none border-2 border-gray-200 focus:border-blue-600 rounded-lg">
-        <span class="text-red-600 text-sm font-medium">Password required.</span>
-        <button class="py-2.5 px-6 rounded-lg text-white bg-blue-600 hover:bg-blue-700">Submit</button>
-    </form>
+  <h5 class="text-xl mb-2 font-bold text-gray-900">Login</h5>
+  <form action="" class="flex flex-col gap-1" (ngSubmit)="onSubmit()" [formGroup]="loginForm" autocomplete="off"
+    novalidate>
+    <input type="text" placeholder="Email"
+      class="w-full py-2 px-3 outline-none border-2 border-gray-200 focus:border-blue-600 rounded-lg"
+      formControlName="email"
+      [class]="{'border-red-300': loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched, 'border-green-300': loginForm.get('email')?.valid}">
+    @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
+    <span class="text-red-600 text-sm font-medium">Email required.</span>
+    }
+    <input type="password" placeholder="Password"
+      class="w-full py-2 px-3 outline-none border-2 border-gray-200 focus:border-blue-600 rounded-lg"
+      formControlName="password"
+      [class]="{'border-red-300': loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched, 'border-green-300': loginForm.get('password')?.valid}">
+    @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched) {
+    <span class="text-red-600 text-sm font-medium">Password required.</span>
+    }
+    <button class="py-2.5 px-6 rounded-lg text-white bg-blue-600 hover:bg-blue-700">Submit</button>
+  </form>
 </div>
